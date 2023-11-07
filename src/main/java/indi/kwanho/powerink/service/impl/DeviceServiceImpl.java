@@ -1,10 +1,7 @@
 package indi.kwanho.powerink.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import indi.kwanho.powerink.common.CommonResponse;
-import indi.kwanho.powerink.common.DeviceMode;
-import indi.kwanho.powerink.common.DeviceStatus;
-import indi.kwanho.powerink.common.PathConfig;
+import indi.kwanho.powerink.common.*;
 import indi.kwanho.powerink.entity.mysql.Device;
 import indi.kwanho.powerink.models.vo.CommandVO;
 import indi.kwanho.powerink.persistence.mysql.DeviceMapper;
@@ -30,7 +27,7 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device>
         }
         // 发送图片指令
         CommandVO commandVO = new CommandVO();
-        commandVO.setType(DeviceMode.IMAGE_MODE);
+        commandVO.setType(CommandType.REFRESH);
         commandVO.setCommand(PathConfig.BASE_URL + "/" + id + "/frame.bmp");
         return CommonResponse.createForSuccess(commandVO);
     }

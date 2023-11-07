@@ -3,16 +3,17 @@ package indi.kwanho.powerink.entity.mysql;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+
 import lombok.Data;
 
 /**
- *
  * @TableName device
  */
-@TableName(value ="device")
+@TableName(value = "device")
 @Data
 public class Device implements Serializable {
     /**
@@ -72,12 +73,12 @@ public class Device implements Serializable {
         }
         Device other = (Device) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
-            && (this.getOwner() == null ? other.getOwner() == null : this.getOwner().equals(other.getOwner()))
-            && (this.getMode() == null ? other.getMode() == null : this.getMode().equals(other.getMode()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getLastSeen() == null ? other.getLastSeen() == null : this.getLastSeen().equals(other.getLastSeen()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
+                && (this.getOwner() == null ? other.getOwner() == null : this.getOwner().equals(other.getOwner()))
+                && (this.getMode() == null ? other.getMode() == null : this.getMode().equals(other.getMode()))
+                && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+                && (this.getLastSeen() == null ? other.getLastSeen() == null : this.getLastSeen().equals(other.getLastSeen()));
     }
 
     @Override

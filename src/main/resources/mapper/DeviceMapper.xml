@@ -5,17 +5,18 @@
 <mapper namespace="indi.kwanho.powerink.entity.mysql.Device">
 
     <resultMap id="BaseResultMap" type="indi.kwanho.powerink.entity.mysql.Device">
-            <id property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="name" column="name" jdbcType="VARCHAR"/>
-            <result property="description" column="description" jdbcType="VARCHAR"/>
-            <result property="owner" column="owner" jdbcType="BIGINT"/>
-            <result property="mode" column="mode" jdbcType="INTEGER"/>
-            <result property="status" column="status" jdbcType="INTEGER"/>
-            <result property="lastSeen" column="lastSeen" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="owner" column="owner" jdbcType="BIGINT"/>
+        <result property="mode" column="mode" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="lastSeen" column="lastSeen" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,description,
+        id
+        ,name,description,
         owner,mode,status,
         lastSeen
     </sql>
