@@ -47,11 +47,11 @@ public class ShiroConfig {
         Map<String, String> map = new HashMap<>();
         map.put("/user/login", "common");
         map.put("/user/register", "common");
-//        map.put("/fileIO/callback", "common");
+        map.put("/fileIO/callback", "common");
         map.put("/test/**", "common");
         map.put("/blob/**", "common");
-//        map.put("/**", "common");
-        map.put("/**", "jwt"); // 除了上面的白名单之外，都流入jwt过滤器
+        map.put("/**", "common");
+//        map.put("/**", "jwt"); // 除了上面的白名单之外，都流入jwt过滤器
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
         return shiroFilterFactoryBean;

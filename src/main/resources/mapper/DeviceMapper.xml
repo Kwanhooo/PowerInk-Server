@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="indi.kwanho.powerink.entity.mysql.Device">
+
+    <resultMap id="BaseResultMap" type="indi.kwanho.powerink.entity.mysql.Device">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="owner" column="owner" jdbcType="BIGINT"/>
+            <result property="mode" column="mode" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="lastSeen" column="lastSeen" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,description,
+        owner,mode,status,
+        lastSeen
+    </sql>
+</mapper>
