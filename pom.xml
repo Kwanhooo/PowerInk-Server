@@ -152,6 +152,13 @@
             <artifactId>thumbnailator</artifactId>
             <version>0.4.13</version> <!-- 根据实际情况选择版本 -->
         </dependency>
+
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
