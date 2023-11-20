@@ -2,6 +2,7 @@ package indi.kwanho.powerink.controller;
 
 import indi.kwanho.powerink.common.CommonResponse;
 import indi.kwanho.powerink.entity.mysql.Device;
+import indi.kwanho.powerink.models.dto.TextUploadDO;
 import indi.kwanho.powerink.service.SettingsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class SettingsController {
             return ResponseEntity.status(400).body("文件为空");
         }
         return ResponseEntity.ok(settingsService.uploadImage(file, id));
+    }
+
+    @PostMapping("/uploadText/{id}")
+    public ResponseEntity<String> handleTextUpload(@RequestBody TextUploadDO text, @PathVariable String id) {
+        return ResponseEntity.ok(settingsService.uploadText(text.getText(), id));
     }
 }

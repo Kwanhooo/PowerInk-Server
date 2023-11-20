@@ -7,9 +7,8 @@ import indi.kwanho.powerink.entity.mysql.Device;
 import indi.kwanho.powerink.exception.BusinessException;
 import indi.kwanho.powerink.persistence.mysql.DeviceMapper;
 import indi.kwanho.powerink.service.SettingsService;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.imgscalr.Scalr;
+import indi.kwanho.powerink.util.ImageProcessor;
+import indi.kwanho.powerink.util.TextImageGenerator;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,8 +31,14 @@ public class SettingsServiceImpl implements SettingsService {
             throw new BusinessException(ResponseCode.ERROR, "设备不存在");
         }
         device.setMode(mode);
+        applyMode(device);
         deviceMapper.updateById(device);
         return device;
+    }
+
+    private void applyMode(Device device) {
+        // 更新服务端版本号
+        VersionControl.getInstance().putValue(device.getId(), System.currentTimeMillis());
     }
 
     @Override
@@ -49,34 +54,48 @@ public class SettingsServiceImpl implements SettingsService {
         VersionControl.getInstance().putValue(id, System.currentTimeMillis());
 
         try {
-            // 读取图片文件
-            BufferedImage srcImage = ImageIO.read(file.getInputStream());
-            if (srcImage == null) {
-                throw new IOException("无法解码图片文件");
-            }
+            // 使用ImageProcessor处理图像
+            BufferedImage processedImage = ImageProcessor.processImage(file.getInputStream());
 
-            // 裁剪图片为400x300
-            BufferedImage scaledImage = Scalr.resize(srcImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_EXACT, 400, 300);
+            // 构建文件保存路径
+            String outputImagePath = "/www/wwwroot/asset.0xcafebabe.cn/" + id + "/frame.bmp";
 
-            // 确定保存图片的路径
-            String directoryPath = "/home/kwanho/" + id;
-            File directory = new File(directoryPath);
-            if (!directory.exists() && !directory.mkdirs()) {
-                throw new IOException("无法创建目录: " + directoryPath);
-            }
+            // 保存为BMP格式
+            File outputFile = new File(outputImagePath);
+            ImageIO.write(processedImage, "bmp", outputFile);
 
-            // 保存裁剪后的图片为BMP格式
-            File outputfile = new File(directoryPath, "frame.bmp");
-            boolean result = ImageIO.write(scaledImage, "BMP", outputfile);
-            if (!result) {
-                throw new IOException("写入BMP文件失败");
-            }
-
-            return "图片上传并裁剪成功";
+            return "图像上传并转换成功，保存于：" + outputImagePath;
 
         } catch (IOException e) {
             e.printStackTrace();
             throw new BusinessException(ResponseCode.ERROR, "图片上传失败: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public String uploadText(String text, String id) {
+        // 确认设备存在并且在文本模式
+        Device device = deviceMapper.selectById(id);
+        if (device == null) {
+            throw new BusinessException(ResponseCode.ERROR, "设备不存在");
+        }
+        if (!Objects.equals(device.getMode(), DeviceMode.TEXT_MODE)) {
+            throw new BusinessException(ResponseCode.ERROR, "设备不在文本模式");
+        }
+        VersionControl.getInstance().putValue(id, System.currentTimeMillis());
+
+        try {
+            // 构建文件保存路径
+            String outputImagePath = "/www/wwwroot/asset.0xcafebabe.cn/" + id + "/frame.bmp";
+
+            // 使用TextImageGenerator生成图像
+            TextImageGenerator.generateImageFromText(text, outputImagePath);
+
+            return "文本图像上传成功，保存于：" + outputImagePath;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new BusinessException(ResponseCode.ERROR, "文本图像上传失败: " + e.getMessage());
         }
     }
 

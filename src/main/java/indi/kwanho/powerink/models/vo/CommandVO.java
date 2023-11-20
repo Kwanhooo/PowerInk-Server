@@ -6,4 +6,5 @@ import lombok.Data;
 public class CommandVO {
     int type;
     String command;
+    Long version;
 }

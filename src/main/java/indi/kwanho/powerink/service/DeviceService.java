@@ -12,7 +12,9 @@ import indi.kwanho.powerink.models.vo.CommandVO;
  */
 public interface DeviceService extends IService<Device> {
 
-    public CommonResponse<CommandVO> giveCommand(String id);
+    public CommonResponse<CommandVO> giveCommand(String id, Long version, String clientIp);
 
     public Device registerDevice(String id);
+
+    CommonResponse<? extends Device> getDeviceInfo(String id);
 }

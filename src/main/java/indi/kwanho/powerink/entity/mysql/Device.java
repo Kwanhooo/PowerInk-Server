@@ -3,12 +3,10 @@ package indi.kwanho.powerink.entity.mysql;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import lombok.Data;
 
 /**
  * @TableName device
@@ -57,8 +55,14 @@ public class Device implements Serializable {
     @TableField(value = "lastSeen")
     private LocalDateTime lastSeen;
 
+    /**
+     *
+     */
+    @TableField(value = "ip")
+    private String ip;
+
     @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1630045833588433291L;
 
     @Override
     public boolean equals(Object that) {
@@ -78,7 +82,8 @@ public class Device implements Serializable {
                 && (this.getOwner() == null ? other.getOwner() == null : this.getOwner().equals(other.getOwner()))
                 && (this.getMode() == null ? other.getMode() == null : this.getMode().equals(other.getMode()))
                 && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-                && (this.getLastSeen() == null ? other.getLastSeen() == null : this.getLastSeen().equals(other.getLastSeen()));
+                && (this.getLastSeen() == null ? other.getLastSeen() == null : this.getLastSeen().equals(other.getLastSeen()))
+                && (this.getIp() == null ? other.getIp() == null : this.getIp().equals(other.getIp()));
     }
 
     @Override
@@ -92,6 +97,7 @@ public class Device implements Serializable {
         result = prime * result + ((getMode() == null) ? 0 : getMode().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getLastSeen() == null) ? 0 : getLastSeen().hashCode());
+        result = prime * result + ((getIp() == null) ? 0 : getIp().hashCode());
         return result;
     }
 
@@ -109,6 +115,7 @@ public class Device implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", lastSeen=").append(lastSeen);
         sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(", ip=").append(ip);
         sb.append("]");
         return sb.toString();
     }

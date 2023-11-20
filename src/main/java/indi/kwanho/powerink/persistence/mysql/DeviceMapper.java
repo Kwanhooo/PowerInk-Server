@@ -1,7 +1,7 @@
 package indi.kwanho.powerink.persistence.mysql;
 
-import indi.kwanho.powerink.entity.mysql.Device;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import indi.kwanho.powerink.entity.mysql.Device;
 
 /**
  * @author kwanho

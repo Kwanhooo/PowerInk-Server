@@ -12,12 +12,13 @@
         <result property="mode" column="mode" jdbcType="INTEGER"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="lastSeen" column="lastSeen" jdbcType="TIMESTAMP"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id
         ,name,description,
         owner,mode,status,
-        lastSeen
+        lastSeen,ip
     </sql>
 </mapper>
