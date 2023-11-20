@@ -85,8 +85,8 @@ public class DeviceServiceImpl extends ServiceImpl<DeviceMapper, Device>
         }
         DeviceInfoVO vo = new DeviceInfoVO();
         BeanUtils.copyProperties(device, vo);
-        // 计算当前时间和lastSeen的时间差，如果超过5分钟，认为设备离线
-        vo.setOnline(!vo.getLastSeen().plusMinutes(5).isBefore(LocalDateTime.now()));
+        // 计算当前时间和lastSeen的时间差，如果超过30s，认为设备离线
+        vo.setOnline(!vo.getLastSeen().plusSeconds(30).isBefore(LocalDateTime.now()));
         return CommonResponse.createForSuccess(vo);
     }
 }
