@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @TableName user
@@ -15,49 +15,49 @@ import java.time.LocalDateTime;
 @Data
 public class User implements Serializable {
     /**
-     * id
+     *
      */
-    @TableId(value = "user_id")
-    private String userId;
+    @TableId(value = "id")
+    private Long id;
 
     /**
-     * 用户名
+     *
      */
     @TableField(value = "username")
     private String username;
 
     /**
-     * 密码
+     *
      */
     @TableField(value = "password")
     private String password;
 
     /**
-     * 昵称
+     *
      */
     @TableField(value = "nickname")
     private String nickname;
 
     /**
-     * 注册时间
+     *
      */
-    @TableField(value = "reg_time")
-    private LocalDateTime regTime;
+    @TableField(value = "regTime")
+    private Date regTime;
 
     /**
-     * 用户角色
+     *
      */
     @TableField(value = "role")
     private String role;
 
     /**
-     * 是否激活（1激活、0封号）
+     *
      */
-    @TableField(value = "is_valid")
+    @TableField(value = "isValid")
     private Integer isValid;
 
     @TableField(exist = false)
-    private static final long serialVersionUID = -5494986006488074866L;
+    private static final long serialVersionUID = 4886617624347953014L;
 
     @Override
     public boolean equals(Object that) {
@@ -71,7 +71,7 @@ public class User implements Serializable {
             return false;
         }
         User other = (User) that;
-        return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
                 && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
                 && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
@@ -84,7 +84,7 @@ public class User implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getNickname() == null) ? 0 : getNickname().hashCode());
@@ -100,13 +100,13 @@ public class User implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", userId=").append(userId);
+        sb.append(", id=").append(id);
         sb.append(", username=").append(username);
         sb.append(", password=").append(password);
         sb.append(", nickname=").append(nickname);
         sb.append(", regTime=").append(regTime);
-        sb.append(", regTime=").append(regTime);
         sb.append(", role=").append(role);
+        sb.append(", isValid=").append(isValid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

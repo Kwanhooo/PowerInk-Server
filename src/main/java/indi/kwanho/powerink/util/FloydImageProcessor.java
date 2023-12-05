@@ -1,3 +1,5 @@
+package indi.kwanho.powerink.util;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

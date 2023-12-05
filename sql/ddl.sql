@@ -4,7 +4,7 @@ create
 use
     powerink;
 
-create table powerink.device
+create table device
 (
     id          varchar(50)   not null
         primary key,
@@ -17,3 +17,16 @@ create table powerink.device
     ip          varchar(1024) null
 );
 
+create table user
+(
+    id       bigint                              not null
+        primary key,
+    username varchar(256)                        not null,
+    password varchar(1024)                       not null,
+    nickname varchar(256) default 'PowerInk用户' null,
+    regTime  datetime                            null,
+    role     varchar(256)                        null,
+    isValid  tinyint      default 1              null,
+    constraint user_pk2
+        unique (username)
+);
